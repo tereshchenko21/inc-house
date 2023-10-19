@@ -96,8 +96,8 @@ body {
   height: 100%;
   left: 0;
   top: 0;
-  -o-object-fit: 0;
-     object-fit: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .header {
@@ -105,10 +105,12 @@ body {
 }
 
 .header__container {
-  display: flex;
   align-items: center;
   min-height: 100px;
   justify-content: space-between;
+  padding: 0 15px;
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
 .menu__list {
@@ -117,13 +119,17 @@ body {
   align-items: center;
 }
 
-.menu__item:not(:last-child) {
-  margin: 0 60px 0 0;
-}
-
 .menu__link {
   font-family: "Raleway", sans-serif;
   color: #2C2D35;
+}
+
+.header__menu {
+  display: flex;
+  align-items: center;
+  height: 62px;
+  justify-content: space-between;
+  padding: 0 21px;
 }
 
 @media (max-width: 768px) {
@@ -140,12 +146,14 @@ body {
     margin: 0 0px 0 0;
   }
 }
+@media (max-width: 460px) {
+  .banner__image {
+    display: none;
+  }
+}
 @media (max-width: 576px) {
   .header__logo {
     padding: 16px 0;
-  }
-  ._container {
-    max-width: 510px;
   }
   .header__container {
     flex-direction: column;
@@ -155,16 +163,98 @@ body {
   .menu__item:not(:last-child) {
     margin: 0 0px 0 0;
   }
-  .menu__item:last-child {
-    margin-left: auto;
-  }
   .header__menu {
     border-top: 1px solid #C3D1C6;
   }
   .menu__list {
-    padding: 16px 0;
     justify-content: space-between;
     align-items: center;
+  }
+  .header__burger {
+    display: block;
+    position: relative;
+    width: 30px;
+    height: 20px;
+    z-index: 100000;
+  }
+  .header__burger::before {
+    content: "";
+    background-color: #2C2D35;
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .header__burger::after {
+    content: "";
+    background-color: #2C2D35;
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+  }
+  .header__burger span {
+    background-color: #2C2D35;
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    top: 9px;
+  }
+  .header__burger.active::after {
+    transition: 0.3s;
+    transform: rotate(-45deg);
+    bottom: 7px;
+  }
+  .header__burger.active::before {
+    transition: 0.3s;
+    transform: rotate(45deg);
+    top: 10px;
+  }
+  .header__burger.active span {
+    opacity: 0;
+  }
+  body.active {
+    overflow: hidden;
+  }
+  .menu__list {
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    gap: 50px;
+  }
+  .menu__list .menu__item:first-child {
+    margin-top: 80px;
+  }
+  .header__container {
+    padding: 0;
+  }
+  .header__logo {
+    display: block;
+    background-color: #fff;
+    width: 100%;
+    text-align: center;
+  }
+  .header__menu {
+    border: 0;
+  }
+  .menu__list {
+    position: fixed;
+    left: 0;
+    top: 68px;
+    height: calc(100vh - 68px);
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    background-color: #E1EDE6;
+    z-index: 15;
+  }
+  .menu__list.active {
+    opacity: 1;
+    visibility: visible;
   }
 }
 .banner__container {
@@ -238,6 +328,17 @@ body {
   }
   .body__subtitle {
     font-size: 16px;
+  }
+}
+@media (max-width: 320px) {
+  .banner__image {
+    display: none;
+  }
+  .body__subtitle {
+    margin-top: 20px;
+  }
+  .body__button {
+    margin-top: 60px;
   }
 }
 .replica__container {
@@ -438,8 +539,28 @@ body {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
+@media (max-width: 768px) {
+  .title__text {
+    font-size: 30px;
+  }
+}
+@media (max-width: 576px) {
+  .title__text {
+    font-size: 24px;
+  }
+}
+@media (max-width: 320px) {
+  .title__text {
+    font-size: 24px;
+  }
+  .content__item {
+    font-size: 16px;
+  }
+}
 .team {
   padding-bottom: 70px;
 }
@@ -474,10 +595,19 @@ body {
 
 .team__icons {
   display: flex;
+  width: 300px;
   justify-content: space-between;
-  flex-wrap: wrap;
 }
 
+@media (max-width: 768px) {
+  .team__container {
+    flex-direction: column;
+  }
+  .team__body {
+    margin-top: 40px;
+    width: 100%;
+  }
+}
 .footer {
   background-color: #E1EDE6;
 }
